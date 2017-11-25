@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
-import {View , Text , Button} from 'react-native'
+import {View , Text} from 'react-native'
 import {StackNavigator} from 'react-navigation'
-
+import {CardSection, Button} from './components'
 
 class InsuranceList extends Component {
 
@@ -14,11 +14,14 @@ class InsuranceList extends Component {
         const {navigate} = this.props.navigation
         
         return(
-            <View>
-                <Text>hello world from insrauce list</Text>
-                <Button
-                    title="Add Insurance"
-                    onPress={()=> navigate('Add')}/>
+            <View>    
+                <CardSection>
+                    <Text>here is the list</Text>
+                </CardSection>
+                <CardSection>
+                <Text>here is the amount of the yearly cost</Text>
+                </CardSection>
+                <Button text= 'Add Insurance' onPress = {()=> navigate('Add')}/>
             </View>
         )
     }

@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View, Text, StyleSheet,ListView} from 'react-native'
+import {View, Text, StyleSheet,ListView,TouchableOpacity,Alert} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 import {CardSection, Button} from './components'
 import api from './api'
@@ -18,14 +18,16 @@ class InsuranceList extends Component {
             "http://www.moddather.net/moddatherTask/get_insurances"
         ).then((res) => {            
             const {values} = res 
+            const {dataSource,count} = this.state
+            
             if(values.length > 0){
                 for (var i = 0; i < values.length; i++)
                 {
-                    this.setState({ dataSource: this.state.dataSource.cloneWithRows(values),
-                                    count : this.state.count+parseInt(values[i].price) });
+                    this.setState({ dataSource: dataSource.cloneWithRows(values),
+                                    count : count+parseInt(values[i].price) });
                 }
             }
-        })
+        }).catch((error)=>  alert('you dont have any insurances'))
     }  
     static navigationOptions  = {
         title : 'Insurance List',
@@ -34,23 +36,46 @@ class InsuranceList extends Component {
 
     render(){
         const {navigate} = this.props.navigation
-        
+        const {dataSource,count} = this.state
         return(
             <View style={styles.containerStyle} >    
                 <CardSection>
                 <ListView
                 enableEmptySections={true}
-                dataSource = {this.state.dataSource}
+                dataSource = {dataSource}
                 renderRow = {(rowData) => 
-                <CardSection>
-                    <Text>title : {rowData.title}</Text>
-                    <Text>yearly cost : {rowData.price}</Text>
-                    <Text>catagory : {rowData.cat}</Text>
+                <TouchableOpacity onPress={
+                        () =>{
+                            Alert.alert(
+                                'WARNING !!!',
+                                'Are you sure you want to remove this ?',
+                                [
+                                  {text: 'Remove', onPress: () => {
+                                    api.getCat(
+                                        "http://www.moddather.net/moddatherTask/delete_insurance/"+rowData.id
+                                    ).then((res) => {            
+                                        alert(res.message)
+                                        
+                                    })
+                                    navigate('Home')
+                                  }},
+                                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                                ],
+                                { cancelable: false }
+                              )
+                        }
+                    }>
+                    <CardSection>
+                        <Text>title : {rowData.title}</Text>
+                        <Text>yearly cost : {rowData.price}</Text>
+                        <Text>catagory : {rowData.cat}</Text>
+                    </CardSection>
+                </TouchableOpacity>
+                }/>
+
                 </CardSection>
-            }/>
-                </CardSection>
                 <CardSection>
-                <Text>here is the amount of the yearly cost</Text>
+                <Text>amount of yearly cost : {count}</Text>
                 </CardSection>
                 <Button text= 'Add Insurance' onPress = {()=> navigate('Add')}/>
             </View>

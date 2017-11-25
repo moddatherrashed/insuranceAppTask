@@ -23,7 +23,7 @@ const Input = ({label ,value , placeholder, onChangeText , secureTextEntry}) => 
 const styles =  StyleSheet.create(
     {
         inputStyle : {
-            color : '#000',
+            color : '#007aff',
             paddingRight : 5,
             paddingLeft : 5 ,
             fontSize : 18 ,
@@ -34,7 +34,7 @@ const styles =  StyleSheet.create(
         labelStyle : {
             fontSize : 18 ,
             paddingLeft : 20 ,
-            color : '#000',
+            color : '#007aff',
             flex : 2
         },
         containerStyle : {

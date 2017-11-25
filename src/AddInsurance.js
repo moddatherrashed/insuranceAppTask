@@ -8,7 +8,9 @@ class AddInsurance extends Component {
     state = {title : '', price : '', singleCat : '', cat : [] }
     
     static navigationOptions  = {
-        title : 'Add'
+        title : 'Add',
+        headerTintColor: '#007aff'
+        
     }
     componentWillMount(){
         api.getCat(
@@ -30,7 +32,7 @@ class AddInsurance extends Component {
 
     renderCat(){
         return this.state.cat.map(
-            cat => <Picker.Item key={cat.pageid} label={(cat.title).substring(9)} value={(cat.title).substring(9)} />
+            cat => <Picker.Item style = {styles.textStyle} key={cat.pageid} label={(cat.title).substring(9)} value={(cat.title).substring(9)} />
         )
     }
     render(){
@@ -53,11 +55,12 @@ class AddInsurance extends Component {
                         onChangeText = {price => this.setState({price})} />
                 </CardSection>
                 <CardSection>
-                    <Text>Catagory</Text>
+                    <Text style = {styles.textStyle}>Catagory</Text>
                     <Picker
+                        style = {styles.textStyle}
                         selectedValue={singleCat}
                         onValueChange={(itemValue, itemIndex) => this.setState({singleCat: itemValue})}>
-                        <Picker.Item label="Please chose a catagory"/>
+                        <Picker.Item  style = {styles.textStyle} label="Please chose a catagory"/>
                         {this.renderCat()}
                     </Picker>
                 </CardSection>
@@ -99,6 +102,10 @@ const styles = StyleSheet.create({
     containerStyle : {
         backgroundColor : '#007aff',
          flex :1
+    },
+    textStyle : {
+        color : '#007aff'
+        
     }
 })
 export default AddInsurance

@@ -18,20 +18,20 @@ class InsuranceList extends Component {
             "http://www.moddather.net/moddatherTask/get_insurances"
         ).then((res) => {            
             const {values} = res 
-            const {dataSource,count} = this.state
+            const {dataSource} = this.state
             
             if(values.length > 0){
                 for (var i = 0; i < values.length; i++)
                 {
                     this.setState({ dataSource: dataSource.cloneWithRows(values),
-                                    count : count+parseInt(values[i].price) });
+                                    count : this.state.count+parseInt(values[i].price) });
                 }
             }
         }).catch((error)=>  alert('you dont have any insurances'))
     }  
-    static navigationOptions  = {
-        title : 'Insurance List',
-        headerLeft: null        
+    static navigationOptions = {
+        title: 'Insurance List',
+        headerTintColor: '#007aff'
     }
 
     render(){
@@ -66,16 +66,16 @@ class InsuranceList extends Component {
                         }
                     }>
                     <CardSection>
-                        <Text>title : {rowData.title}</Text>
-                        <Text>yearly cost : {rowData.price}</Text>
-                        <Text>catagory : {rowData.cat}</Text>
+                        <Text style = {styles.textStyle}>Title : {rowData.title}</Text>
+                        <Text style = {styles.textStyle}>Yearly Cost : {rowData.price} CHF</Text>
+                        <Text style = {styles.textStyle}>Catagory : {rowData.cat}</Text>
                     </CardSection>
                 </TouchableOpacity>
                 }/>
 
                 </CardSection>
                 <CardSection>
-                <Text>amount of yearly cost : {count}</Text>
+                <Text style = {styles.textStyle}>amount of yearly cost : {count}</Text>
                 </CardSection>
                 <Button text= 'Add Insurance' onPress = {()=> navigate('Add')}/>
             </View>
@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
     containerStyle : {
         flex : 1,
         backgroundColor : '#007aff'
+    },
+    textStyle : {
+        color : '#007aff'
+        
     }
 })
 

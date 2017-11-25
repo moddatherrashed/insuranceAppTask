@@ -26,9 +26,10 @@ const styles =  StyleSheet.create(
             color : '#000',
             paddingRight : 5,
             paddingLeft : 5 ,
-            fontSize : 15 ,
-            lineHeight : 35 ,
-            flex : 4
+            fontSize : 18 ,
+            height : 40 ,
+            lineHeight : 55 ,
+            flex : 3
         },
         labelStyle : {
             fontSize : 18 ,
@@ -37,9 +38,10 @@ const styles =  StyleSheet.create(
             flex : 2
         },
         containerStyle : {
-            height : 40 ,
+            height : 40  ,
             flex : 1 ,
             marginTop : 50 ,
+            marginBottom : 50 ,
             flexDirection : 'row',
             alignItems : 'center'
 

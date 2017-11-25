@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View , Text} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 import {CardSection, Button} from './components'
 
@@ -14,7 +14,7 @@ class InsuranceList extends Component {
         const {navigate} = this.props.navigation
         
         return(
-            <View>    
+            <View style={styles.containerStyle} >    
                 <CardSection>
                     <Text>here is the list</Text>
                 </CardSection>
@@ -26,5 +26,11 @@ class InsuranceList extends Component {
         )
     }
 }
+const styles = StyleSheet.create({
+    containerStyle : {
+        flex : 1,
+        backgroundColor : '#007aff'
+    }
+})
 
 export default InsuranceList

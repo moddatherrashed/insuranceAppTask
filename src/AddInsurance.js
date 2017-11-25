@@ -1,6 +1,6 @@
 import React , {Component} from 'react'
 import {StackNavigator} from 'react-navigation'
-import {Text,View} from 'react-native'
+import {Text,View,StyleSheet} from 'react-native'
 
 
 class AddInsurance extends Component {
@@ -9,10 +9,17 @@ class AddInsurance extends Component {
     }
     render(){
         return(
-            <View><Text>here is add insurance</Text></View>
+            <View style={styles.containerStyle} >
+            
+            </View>
         )
     }
 
 }
-
+const styles = StyleSheet.create({
+    containerStyle : {
+        backgroundColor : '#007aff',
+         flex :1
+    }
+})
 export default AddInsurance
